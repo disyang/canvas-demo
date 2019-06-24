@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+
+<body>
+    <canvas id="coupon" width="600" height="600"></canvas>
+    <script>
+        window.onload = function () {
+            const canvas = document.querySelector('#coupon');
+            const context = canvas.getContext('2d');
+            const size = 100; // 优惠券尺寸大小
+            context.translate(canvas.width / 2, canvas.height / 2);
+            context.save();
+            context.moveTo(0, 0);
+            context.lineTo(0, size * 0.4);
+            context.arcTo(-size * 0.1, size * 0.4, -size * 0.1, size * 0.5, size * 0.1);
+            context.lineTo(-size, size * 0.5);
+            context.lineTo(-size * 1.03, size * 0.47);
+            context.lineTo(-size * 1.03, -size * 0.47);
+            context.lineTo(-size, -size * 0.5);
+            context.lineTo(-size * 0.1, -size * 0.5);
+            context.arcTo(-size * 0.1, -size * 0.4, 0, -size * 0.4, size * 0.1);
+            context.lineTo(0, 0);
+            const gradient_1 = context.createLinearGradient(-size, -size * 0.5, 0, size * 0.5);
+            gradient_1.addColorStop(0, "#3B81F0");
+            gradient_1.addColorStop(1, "#0550C9");
+            context.fillStyle = gradient_1;
+            context.fill();
+            for(let i = 1; i <= 15; i++) {
+                context.beginPath();
+                context.arc(-size * 1.045, -size * 0.495 + i * size * 0.062, size * 0.03, 0, 2 * Math.PI);
+                context.fillStyle = "#fff";
+                context.fill();
+            }
+            context.restore();
+            context.save();
+            context.beginPath();
+            context.arc(-size * 0.55, -size * 0.425, size * 0.20, -0.125 * Math.PI, 1.125 * Math.PI);
+            context.fillStyle = "#E8E540";
+            context.fill();
+            context.beginPath();
+            context.arc(-80, -50, 15, 0, Math.PI);
+            context.fillStyle = "rgba(232, 15, 191, 0.8)";
+            context.fill();
+            context.beginPath();
+            const gradient_2 = context.createLinearGradient(-size * 0.6, size * 0.1, -size * 0.2, size * 0.5);
+            gradient_2.addColorStop(0, "rgb(234, 3, 201)");
+            gradient_2.addColorStop(1, "rgba(232, 80, 211, 0.1)");
+            context.arc(-size * 0.55, size * 0.425, size * 0.20, -1.125 * Math.PI, 0.125 * Math.PI);
+            context.fillStyle = gradient_2;
+            context.fill();
+            context.beginPath();
+            context.arc(-size * 0.30, size * 0.575, size * 0.20, 1.125 * Math.PI, -0.125 * Math.PI);
+            context.fillStyle = "rgba(49, 152, 185, 0.5)";
+            context.fill();
+            context.restore();
+            context.save();
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(0, size * 0.4);
+            context.arcTo(size * 0.1, size * 0.4, size * 0.1, size * 0.5, size * 0.1);
+            context.lineTo(size * 2.5, size * 0.5);
+            context.lineTo(size * 2.5, size * 0.1)
+            context.arcTo(size * 2.4, size * 0.1, size * 2.4, 0, size * 0.1);
+            context.arcTo(size * 2.4, -size * 0.1, size * 2.5, -size * 0.1, size * 0.1);
+            context.lineTo(size * 2.5, -size * 0.5);
+            context.lineTo(size * 0.1, -size * 0.5);
+            context.arcTo(size * 0.1, -size * 0.4, 0, -size * 0.4, size * 0.1);
+            context.lineTo(0, 0);
+            context.lineWidth = 0.5;
+            context.strokeStyle = "#719BC4";
+            context.fillStyle = "#F7F7F7";
+            context.fill();
+            context.stroke();
+            context.restore();
+            context.save();
+            context.beginPath()
+            context.font = "36px 微软雅黑";
+            context.fillStyle = "#fff";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillText("100", -size * 0.45, 0);
+            context.beginPath();
+            context.font = "18px 微软雅黑";
+            context.textBaseline = "hanging";
+            context.fillText("￥", -size * 0.85, 0);
+            context.restore();
+            context.save();
+            context.beginPath();
+            context.font = "12px 微软雅黑"
+            context.fillStyle = "#2087F2";
+            context.fillText("满119元可用", size * 0.1, 0);
+            context.restore();
+            context.save();
+            context.beginPath();
+            context.moveTo(size * 0.2, -size * 0.35);
+            context.arcTo(size * 0.1, -size * 0.35, size * 0.1, -size * 0.25, size * 0.1);
+            context.arcTo(size * 0.1, -size * 0.15, size * 0.2, -size * 0.15, size * 0.1);
+            context.lineTo(size * 0.6, -size * 0.15);
+            context.arcTo(size * 0.7, -size * 0.15, size * 0.7, -size * 0.25, size * 0.1);
+            context.arcTo(size * 0.7, -size * 0.35, size * 0.6, -size * 0.35, size * 0.1);
+            context.fillStyle = "#2087F2";
+            context.fill();
+            context.beginPath();
+            context.font = "11px 微软雅黑";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = "#fff";
+            context.fillText("店铺东券", size * 0.4, -size * 0.25);
+            context.beginPath();
+            context.font = "12px 微软雅黑";
+            context.textAlign = "left";
+            context.fillStyle = "#000";
+            context.fillText("仅可购买个人护理部分商品", size * 0.8, -size * 0.25);
+            context.beginPath();
+            context.font = "12px 微软雅黑";
+            context.textAlign = "left";
+            context.fillStyle = "#909399";
+            context.fillText("2019.06.21-2019.06.30", size * 0.1, size * 0.3);
+            context.beginPath();
+            context.moveTo(size * 1.65, size * 0.18)
+            context.arcTo(size * 1.5, size * 0.18, size * 1.5, size * 0.3, size * 0.12);
+            context.arcTo(size * 1.5, size * 0.42, size * 1.65, size * 0.42, size * 0.12);
+            context.lineTo(size * 2.15, size * 0.42);
+            context.arcTo(size * 2.3, size * 0.42, size * 2.3, size * 0.3, size * 0.12);
+            context.arcTo(size * 2.3, size * 0.18, size * 2.15, size * 0.18, size * 0.12);
+            context.lineTo(size * 1.65, size * 0.18)
+            context.strokeStyle = "#2087F2";
+            context.stroke();
+            context.beginPath();
+            context.font = "12px 微软雅黑";
+            context.textAlign = "center";
+            context.fillStyle = "#2087F2";
+            context.fillText("立即领取", size * 1.9, size * 0.3);
+        }
+    </script>
+</body>
+
+</html>
