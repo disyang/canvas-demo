@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <canvas id="coupon" width="600" height="600"></canvas>
+    <canvas id="coupon" width="500" height="400"></canvas>
     <script>
         window.onload = function () {
             const canvas = document.querySelector('#coupon');
@@ -89,7 +89,7 @@
             context.beginPath();
             context.font = "18px 微软雅黑";
             context.textBaseline = "hanging";
-            context.fillText("￥", -size * 0.85, 0);
+            context.fillText("￥", -size * 0.85, -size * 0.05);
             context.restore();
             context.save();
             context.beginPath();
@@ -112,12 +112,12 @@
             context.textAlign = "center";
             context.textBaseline = "middle";
             context.fillStyle = "#fff";
-            context.fillText("店铺东券", size * 0.4, -size * 0.25);
+            context.fillText("店铺东券", size * 0.4, -size * 0.24);
             context.beginPath();
             context.font = "12px 微软雅黑";
             context.textAlign = "left";
             context.fillStyle = "#000";
-            context.fillText("仅可购买个人护理部分商品", size * 0.8, -size * 0.25);
+            context.fillText("仅可购买个人护理部分商品", size * 0.8, -size * 0.24);
             context.beginPath();
             context.font = "12px 微软雅黑";
             context.textAlign = "left";
