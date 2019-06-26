@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>canvas图片放大镜</title>
+</head>
+
+<body>
+  <div id="canvas-warp">
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.querySelector('#canvas'),
+      context = canvas.getContext('2d');
+    const image = new Image();
+    image.src = 'test.jpg';
+    image.onload = function () {
+      context.drawImage(image, 0, 0, 600, 400);
+    }
+    let dragging = false,
+      bigImageData = null,
+      r = 50, // 需要放大区域半径
+      magnifyRectangle = {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+      };
+    // 获取鼠标在canvas定位
+    function windowToCanvas(x, y) {
+      const bbox = canvas.getBoundingClientRect();
+      return {
+        x: x - bbox.left * (canvas.width / bbox.width),
+        y: y - bbox.top * (canvas.height / bbox.height)
+      }
+    }
+
+    function magnifyRectangleHandle(e) {
+      const {x, y} = windowToCanvas(e.clientX, e.clientY);
+      magnifyRectangle.x = x - magnifyRectangle.width / 2;
+      magnifyRectangle.y = y - magnifyRectangle.height / 2;
+    }
+    canvas.onmousemove = function (e) {
+      if (dragging) {
+        drawMagnifyingGlass();
+        magnifyRectangleHandle(e);
+        drawBigImage();
+      }
+    }
+    // 鼠标down放大
+    canvas.onmousedown = function (e) {
+      dragging = true;
+      magnifyRectangleHandle(e);
+      drawBigImage();
+    }
+    canvas.onmouseup = function () {
+      dragging = false;
+      drawMagnifyingGlass();
+    }
+    canvas.onmouseout = function() {
+      dragging = false;
+      drawMagnifyingGlass();
+    }
+    function drawBigImage() {
+      context.save();
+      bigImageData = context.getImageData(magnifyRectangle.x, magnifyRectangle.y, magnifyRectangle.width, magnifyRectangle.height); // 保存放大区域数据
+      setClip();
+      context.drawImage(canvas,
+        magnifyRectangle.x + magnifyRectangle.width / 4,
+        magnifyRectangle.y + magnifyRectangle.height / 4,
+        magnifyRectangle.width / 2,
+        magnifyRectangle.height / 2,
+        magnifyRectangle.x,
+        magnifyRectangle.y,
+        magnifyRectangle.width,
+        magnifyRectangle.height
+      )
+      context.restore();
+    }
+    // 恢复原来数据
+    function drawMagnifyingGlass() {
+      if (bigImageData != null) {
+        context.putImageData(bigImageData, magnifyRectangle.x, magnifyRectangle.y);
+      }
+    }
+    // 放缩大小
+    function setClip() {
+      context.beginPath();
+      context.arc(magnifyRectangle.x + magnifyRectangle.width / 2, magnifyRectangle.y + magnifyRectangle.height / 2, r, 0, 2 * Math.PI);
+      context.clip();
+    }
+  </script>
+</body>
+
+</html>
