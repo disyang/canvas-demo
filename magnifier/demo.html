@@ -13,8 +13,8 @@
 
   <script>
     const canvas = document.querySelector('#canvas'),
-      context = canvas.getContext('2d');
-    const image = new Image();
+      context = canvas.getContext('2d'),
+      image = new Image();
     image.src = 'test.jpg';
     image.onload = function () {
       context.drawImage(image, 0, 0, 600, 400);
@@ -51,9 +51,14 @@
     }
     // 鼠标down放大
     canvas.onmousedown = function (e) {
-      dragging = true;
-      magnifyRectangleHandle(e);
-      drawBigImage();
+      if(!dragging) {
+        dragging = true;
+        magnifyRectangleHandle(e);
+        drawBigImage();
+      } else {
+        dragging = false;
+        drawMagnifyingGlass();
+      }
     }
     canvas.onmouseup = function () {
       dragging = false;
