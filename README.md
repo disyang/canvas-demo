@@ -1,9 +1,9 @@
 ### 1、canvas时钟demo，样式如下:  
-[查看代码](https://github.com/yht1989/clock-demo/blob/master/clock/clock.html)  
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/clock/clock.html)  
 ![image](https://github.com/yht1989/clock-demo/blob/master/img/clock.png)
 ### 2、canvas jd电商优惠券demo，样式如下：  
-[查看代码](https://github.com/yht1989/clock-demo/blob/master/coupon/jd.html)  
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/coupon/jd.html)  
 ![image](https://github.com/yht1989/clock-demo/blob/master/img/jd.png)
 ### 3、canvas 图片放大镜功，本地测试canvas上下文api getImageData浏览器会报跨域问题，Firefox不存在这个问题。样式如下：  
-[查看代码](https://github.com/yht1989/clock-demo/blob/master/magnifier/demo.html)  
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/magnifier/demo.html)  
 ![image](https://github.com/yht1989/clock-demo/blob/master/img/magnifier.png)
