@@ -1,5 +1,6 @@
 ### 1、canvas时钟demo，样式如下:  
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/clock/clock.html)  
+<div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/clock.png' /></div>
 ![image](https://github.com/yht1989/clock-demo/blob/master/img/clock.png)
 ### 2、canvas jd电商优惠券demo，样式如下：  
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/coupon/jd.html)  
