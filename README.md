@@ -16,5 +16,6 @@
 <div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/magnifier.png' /></div>  
 
 ### 4、canvas刮刮卡demo，样式如下：  
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/scratchCard/demo.html) 
 <div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/startclear.png' /><img src='https://github.com/yht1989/clock-demo/blob/master/img/clearing.png' /><img src='https://github.com/yht1989/clock-demo/blob/master/img/clear.png' /></div> 
 
