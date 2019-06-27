@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>刮刮卡</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="330" height="150"></canvas>
+  <script>
+    window.onload = function () {
+      const canvas = document.querySelector('#canvas');
+      const context = canvas.getContext('2d');
+      context.rect(0, 0, 330, 150);
+      context.clip();
+      context.fillStyle = "rgba(255, 243, 217, 1)";
+      context.fillRect(0, 0, 330, 150);
+      context.fillStyle = "rgba(255, 240, 207, 1)";
+      context.fillRect(15, 10, 300, 130);
+      context.fillStyle = "#fff";
+      const r = 4;
+      for (let i = 0; i <= 12; i++) {
+        context.beginPath();
+        context.arc(0, 8 + 12 * i, r, 0, 2 * Math.PI);
+        context.fill();
+      }
+      for (let i = 0; i <= 12; i++) {
+        context.beginPath();
+        context.arc(330, 8 + 12 * i, r, 0, 2 * Math.PI);
+        context.fill();
+      }
+      context.beginPath();
+      const gradient = context.createLinearGradient(89, 0, 241, 0);
+      gradient.addColorStop(0, '#FF3A18');
+      gradient.addColorStop(1, '#E90708');
+      context.fillStyle = gradient;
+      const [x, y, radius] = [165, 90, 16];
+      context.moveTo(x - 60, y);
+      context.arc(x - 60, y + radius, radius, -0.5 * Math.PI, 0.5 * Math.PI, true);
+      context.lineTo(x + 60, y + 2 * radius);
+      context.arc(x + 60, y + radius, radius, 0.5 * Math.PI, -0.5 * Math.PI, true);
+      context.closePath();
+      context.fill();
+      context.beginPath();
+      context.fillStyle = "#fff";
+      context.font = "16px 微软雅黑";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText("立即领取", x, y + radius);
+      context.fillStyle = "#E90708";
+      context.font = "18px 微软雅黑";
+      context.fillText("免费医疗金5元", 165, 50);
+      context.font = "12px 微软雅黑";
+      context.fillText("手气真不错，邀请小伙伴一起来玩吧~", 165, 70);
+      context.fillStyle = "#2998E7";
+      context.fillText("分享", 300, 20);
+      const imageData = context.getImageData(0, 0, 330, 150);
+      context.beginPath();
+      context.fillStyle = "#E4E4E4";
+      context.fillRect(15, 10, 300, 130);
+      // context.putImageData(imageData, 0, 0);
+      function clearLayer() {
+
+      }
+      // 获取鼠标在canvas定位
+      function windowToCanvas(x, y) {
+        const bbox = canvas.getBoundingClientRect();
+        return {
+          x: x - bbox.left * (canvas.width / bbox.width),
+          y: y - bbox.top * (canvas.height / bbox.height)
+        }
+      }
+    }
+    // 恢复原来数据
+    function drawMagnifyingGlass() {
+      if (bigImageData != null) {
+        context.putImageData(bigImageData, magnifyRectangle.x, magnifyRectangle.y);
+      }
+    }
+    // 放缩大小
+    function setClip() {
+      context.beginPath();
+      context.arc(magnifyRectangle.x + magnifyRectangle.width / 2, magnifyRectangle.y + magnifyRectangle.height / 2, r, 0, 2 * Math.PI);
+      context.clip();
+    }
+  </script>
+</body>
+
+</html>
