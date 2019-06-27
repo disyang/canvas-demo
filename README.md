@@ -15,6 +15,6 @@
 - [x] 鼠标松开或脱离图片恢复原样
 <div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/magnifier.png' /></div>  
 
-### 4、canvas刮刮卡，样式吐下：  
+### 4、canvas刮刮卡demo，样式如下：  
 <div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/startclear.png' /><img src='https://github.com/yht1989/clock-demo/blob/master/img/clearing.png' /><img src='https://github.com/yht1989/clock-demo/blob/master/img/clear.png' /></div> 
 
