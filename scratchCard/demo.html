@@ -19,15 +19,14 @@
       context.fillStyle = "rgba(255, 240, 207, 1)";
       context.fillRect(15, 10, 300, 130);
       context.fillStyle = "#fff";
-      const r = 4;
       for (let i = 0; i <= 12; i++) {
         context.beginPath();
-        context.arc(0, 8 + 12 * i, r, 0, 2 * Math.PI);
+        context.arc(0, 8 + 12 * i, 4, 0, 2 * Math.PI);
         context.fill();
       }
       for (let i = 0; i <= 12; i++) {
         context.beginPath();
-        context.arc(330, 8 + 12 * i, r, 0, 2 * Math.PI);
+        context.arc(330, 8 + 12 * i, 4, 0, 2 * Math.PI);
         context.fill();
       }
       context.beginPath();
@@ -55,17 +54,20 @@
       context.fillText("手气真不错，邀请小伙伴一起来玩吧~", 165, 70);
       context.fillStyle = "#2998E7";
       context.fillText("分享", 300, 20);
+      const offScreenContext = document.createElement('canvas').getContext('2d');
+      offScreenContext.canvas.width = canvas.width;
+      offScreenContext.canvas.height = canvas.height;
+      offScreenContext.putImageData(context.getImageData(0, 0, 330, 150), 0, 0)
       const magnifyRectangle = {
         x: 0,
         y: 0,
-        r: 20,
-        imageData: context.getImageData(0, 0, 330, 150),
+        imageData: offScreenContext.canvas,
         dragging: false,
       }
+      const r = 20;
       context.beginPath();
       context.fillStyle = "#E4E4E4";
       context.fillRect(15, 10, 300, 130);
-      // context.putImageData(imageData, 0, 0);
       function magnifyRectangleHandle(e) {
         const { x, y } = windowToCanvas(e.clientX, e.clientY);
         magnifyRectangle.x = x;
@@ -76,10 +78,22 @@
         magnifyRectangleHandle(e);
         drawBigImage();
       }
+      canvas.onmousemove = function (e) {
+        if (magnifyRectangle.dragging) {
+          magnifyRectangleHandle(e);
+          drawBigImage();
+        }
+      }
+      canvas.onmouseup = function () {
+        magnifyRectangle.dragging = false;
+      }
+      canvas.onmouseout = function () {
+        magnifyRectangle.dragging = false;
+      }
       function drawBigImage() {
         context.save();
         setClip();
-        context.putImageData(magnifyRectangle.imageData, 0, 0, 10, 20, 50,50);
+        context.drawImage(magnifyRectangle.imageData, magnifyRectangle.x - r, magnifyRectangle.y - r, 2 * r, 2 * r, magnifyRectangle.x - r, magnifyRectangle.y - r, 2 * r, 2 * r);
         context.restore();
       }
       function clearLayer() {
@@ -95,7 +109,7 @@
       // 放缩大小
       function setClip() {
         context.beginPath();
-        context.arc(magnifyRectangle.x, magnifyRectangle.y, 10, 0, 2 * Math.PI);
+        context.arc(magnifyRectangle.x, magnifyRectangle.y, r, 0, 2 * Math.PI);
         context.clip();
       }
     }
