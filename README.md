@@ -1,5 +1,5 @@
-**普及**：`<canvas>` 无疑是HTML5元素中功能最强大的一个，`<canvas>`元素用于在网页上绘制图形，requestAnimationFrame接口加成制作出`canvas`动画及更复杂的游戏。  
-**注意**：IE 8 以及更早的版本不支持 `<canvas>` 元素。
+> **普及**：`<canvas>` 无疑是HTML5元素中功能最强大的一个，`<canvas>`元素用于在网页上绘制图形，requestAnimationFrame接口加成制作出`canvas`动画及更复杂的游戏。  
+> **注意**：IE 8 以及更早的版本不支持 `<canvas>` 元素。
 
 ### 1、canvas时钟demo，样式如下:  
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/clock/clock.html)
