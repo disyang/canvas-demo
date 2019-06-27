@@ -55,13 +55,34 @@
       context.fillText("手气真不错，邀请小伙伴一起来玩吧~", 165, 70);
       context.fillStyle = "#2998E7";
       context.fillText("分享", 300, 20);
-      const imageData = context.getImageData(0, 0, 330, 150);
+      const magnifyRectangle = {
+        x: 0,
+        y: 0,
+        r: 20,
+        imageData: context.getImageData(0, 0, 330, 150),
+        dragging: false,
+      }
       context.beginPath();
       context.fillStyle = "#E4E4E4";
       context.fillRect(15, 10, 300, 130);
       // context.putImageData(imageData, 0, 0);
+      function magnifyRectangleHandle(e) {
+        const { x, y } = windowToCanvas(e.clientX, e.clientY);
+        magnifyRectangle.x = x;
+        magnifyRectangle.y = y;
+      }
+      canvas.onmousedown = function (e) {
+        magnifyRectangle.dragging = true;
+        magnifyRectangleHandle(e);
+        drawBigImage();
+      }
+      function drawBigImage() {
+        context.save();
+        setClip();
+        context.putImageData(magnifyRectangle.imageData, 0, 0, 10, 20, 50,50);
+        context.restore();
+      }
       function clearLayer() {
-
       }
       // 获取鼠标在canvas定位
       function windowToCanvas(x, y) {
@@ -71,19 +92,14 @@
           y: y - bbox.top * (canvas.height / bbox.height)
         }
       }
-    }
-    // 恢复原来数据
-    function drawMagnifyingGlass() {
-      if (bigImageData != null) {
-        context.putImageData(bigImageData, magnifyRectangle.x, magnifyRectangle.y);
+      // 放缩大小
+      function setClip() {
+        context.beginPath();
+        context.arc(magnifyRectangle.x, magnifyRectangle.y, 10, 0, 2 * Math.PI);
+        context.clip();
       }
     }
-    // 放缩大小
-    function setClip() {
-      context.beginPath();
-      context.arc(magnifyRectangle.x + magnifyRectangle.width / 2, magnifyRectangle.y + magnifyRectangle.height / 2, r, 0, 2 * Math.PI);
-      context.clip();
-    }
+
   </script>
 </body>
 
