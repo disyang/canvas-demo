@@ -65,6 +65,17 @@
         dragging: false,
       }
       const r = 20;
+      let monitoringPoints = [
+        {x: 165, y: 50}, 
+        {x: 165, y: 70}, 
+        {x: 165, y: 106}, 
+        {x: 135, y: 50}, 
+        {x: 105, y: 70}, 
+        {x: 115, y: 106},
+        {x: 195, y: 50}, 
+        {x: 225, y: 70}, 
+        {x: 215, y: 106}
+      ];
       context.beginPath();
       context.fillStyle = "#E4E4E4";
       context.fillRect(15, 10, 300, 130);
@@ -92,11 +103,15 @@
       }
       function drawBigImage() {
         context.save();
-        setClip();
-        context.drawImage(magnifyRectangle.imageData, magnifyRectangle.x - r, magnifyRectangle.y - r, 2 * r, 2 * r, magnifyRectangle.x - r, magnifyRectangle.y - r, 2 * r, 2 * r);
+        if(monitoringPoints.length !== 0) setClip();
+        else {
+          canvas.onmousedown = null;
+          canvas.onmousemove = null;
+          canvas.onmouseup = null;
+          canvas.onmouseout = null;
+        }
+        context.drawImage(magnifyRectangle.imageData, 0, 0);
         context.restore();
-      }
-      function clearLayer() {
       }
       // 获取鼠标在canvas定位
       function windowToCanvas(x, y) {
@@ -110,10 +125,10 @@
       function setClip() {
         context.beginPath();
         context.arc(magnifyRectangle.x, magnifyRectangle.y, r, 0, 2 * Math.PI);
+        monitoringPoints = monitoringPoints.filter(cur => !context.isPointInPath(cur.x, cur.y));
         context.clip();
       }
     }
-
   </script>
 </body>
 
