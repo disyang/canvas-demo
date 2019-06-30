@@ -19,5 +19,9 @@
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/scratchCard/demo.html)  
 - [x] 借助离屏`<canvas>`保存底层样式
 - [x] 通过检测主要点判断是否全部去除刮层
-<div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/startclear.png' /><img src='https://github.com/yht1989/clock-demo/blob/master/img/clearing.png' /><img src='https://github.com/yht1989/clock-demo/blob/master/img/clear.png' /></div>  
+<div align='center'>
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/startclear.png' />  
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/clearing.png' />  
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/clear.png' />  
+</div>  
 
