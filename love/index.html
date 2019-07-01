@@ -5,47 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>收藏爱心符号</title>
+    <title>爱心动画</title>
 </head>
 
 <body>
-    <canvas id="love" width="500" height="400"></canvas>
+    <canvas id="love" width="400" height="400"></canvas>
     <script>
         window.onload = function () {
             const canvas = document.querySelector('#love');
             const ctx = canvas.getContext('2d');
-            var Heart = function (ctx, x, y, a) {
+            const Love = function (ctx, x, y, a) {
                 this.ctx = ctx;
                 this.x = x;
                 this.y = y;
                 this.a = a;
                 this.vertices = [];
                 for (let i = 0; i < 50; i++) {
-                    var step = i / 50 * (Math.PI * 2);//设置心上面两点之间的角度，具体分成多少份，好像需要去试。
-                    var vector = {
+                    const step = i / 50 * (Math.PI * 2);//设置心上面两点之间的角度，具体分成多少份，好像需要去试。
+                    const vector = {
                         x: this.a * (16 * Math.pow(Math.sin(step), 3)),
                         y: this.a * (13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
                     }
                     this.vertices.push(vector);
                 }
             }
-            Heart.prototype.draw = function () {
+            Love.prototype.draw = function (type, color) {
+                this.ctx.save();
                 this.ctx.beginPath();
                 this.ctx.translate(this.x, this.y);
                 this.ctx.rotate(Math.PI);
                 for (let i = 0; i < 50; i++) {
-                    var vector = this.vertices[i];
+                    const vector = this.vertices[i];
                     this.ctx.lineTo(vector.x, vector.y);
                 }
-                this.ctx.fillStyle = "red";
-                this.ctx.fill();
+                this.ctx[type + 'Style'] = color;
+                this.ctx[type]();
+                this.ctx.restore();
             }
-            canvas.onmousedown = function (e) {
-                var x = e.offsetX;
-                var y = e.offsetY;
-                var a = 6;
-                var heart = new Heart(ctx, x, y, a);
-                heart.draw();
+            function clear() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            const loveBig = new Love(ctx, 200, 200, 6);
+            const loveSmall = new Love(ctx, 200, 200, 5);
+            loveBig.draw('stroke', '#000');
+            canvas.onmousedown = function() {
+                clear();
+                loveSmall.draw('fill', 'red');
             }
         }
     </script>
