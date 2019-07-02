@@ -29,5 +29,5 @@
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/love/demo.html)  
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_1.png' /> <br /> 
-  <img src='https://github.com/yht1989/clock-demo/blob/master/img/love2.png' />  
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_2.png' />  
 </div>  
