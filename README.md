@@ -26,7 +26,7 @@
 </div>  
 
 ### 5、canvas爱心形状，样式如下：
-[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/love/demo.html)  
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/love/index.html)  
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_1.png' />
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_2.png' />
