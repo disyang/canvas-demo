@@ -1,59 +1,61 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>爱心动画</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>爱心动画</title>
 </head>
 
 <body>
-    <canvas id="love" width="400" height="400"></canvas>
-    <script>
-        window.onload = function () {
-            const canvas = document.querySelector('#love');
-            const ctx = canvas.getContext('2d');
-            const Love = function (ctx, x, y, a) {
-                this.ctx = ctx;
-                this.x = x;
-                this.y = y;
-                this.a = a;
-                this.vertices = [];
-                for (let i = 0; i < 50; i++) {
-                    const step = i / 50 * (Math.PI * 2);//设置心上面两点之间的角度，具体分成多少份，好像需要去试。
-                    const vector = {
-                        x: this.a * (16 * Math.pow(Math.sin(step), 3)),
-                        y: this.a * (13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
-                    }
-                    this.vertices.push(vector);
-                }
-            }
-            Love.prototype.draw = function (type, color) {
-                this.ctx.save();
-                this.ctx.beginPath();
-                this.ctx.translate(this.x, this.y);
-                this.ctx.rotate(Math.PI);
-                for (let i = 0; i < 50; i++) {
-                    const vector = this.vertices[i];
-                    this.ctx.lineTo(vector.x, vector.y);
-                }
-                this.ctx[type + 'Style'] = color;
-                this.ctx[type]();
-                this.ctx.restore();
-            }
-            function clear() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            const loveBig = new Love(ctx, 200, 200, 6);
-            const loveSmall = new Love(ctx, 200, 200, 5);
-            loveBig.draw('stroke', '#000');
-            canvas.onmousedown = function() {
-                clear();
-                loveSmall.draw('fill', 'red');
-            }
+  <canvas id="love" width="400" height="400"></canvas>
+  <script>
+    window.onload = function () {
+      const canvas = document.querySelector('#love');
+      const ctx = canvas.getContext('2d');
+      const Love = function (ctx, x, y) {
+        this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.vertices = [];
+      }
+      Love.prototype.draw = function (size, type, color) {
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.translate(this.x, this.y);
+        this.ctx.rotate(Math.PI);
+        this.size = size;
+        for (let i = 0; i < 50; i++) {
+          const step = i / 50 * (Math.PI * 2);
+          const vector = {
+            x: this.size * (16 * Math.pow(Math.sin(step), 3)),
+            y: this.size * (13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
+          }
+          this.vertices.push(vector);
         }
-    </script>
+        for (let i = 0; i < 50; i++) {
+          const vector = this.vertices[i];
+          this.ctx.lineTo(vector.x, vector.y);
+        }
+        this.ctx[type + 'Style'] = color;
+        this.ctx[type]();
+        this.ctx.restore();
+      }
+
+      function clear() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      const loveBig = new Love(ctx, 200, 200);
+      const loveSmall = new Love(ctx, 200, 200);
+      loveBig.draw(6, 'stroke', '#000');
+      canvas.onmousedown = function () {
+        clear();
+        loveSmall.draw(5, 'fill', 'red');
+      }
+    }
+  </script>
 </body>
 
 </html>
