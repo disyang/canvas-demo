@@ -22,6 +22,12 @@
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/startclear.png' /> <br /> 
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/clearing.png' />  <br /> 
-  <img src='https://github.com/yht1989/clock-demo/blob/master/img/clear.png' />  <br /> 
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/clear.png' />  
 </div>  
 
+### 5、canvas爱心形状，样式如下：
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/love/demo.html)  
+<div align='center'>
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_1.png' /> <br /> 
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/love2.png' />  
+</div>  
