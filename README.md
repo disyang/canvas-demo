@@ -31,3 +31,9 @@
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_1.png' />
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/love_2.png' />
 </div>  
+
+### 6、canvas2020东京奥运会的会标，样式如下：  
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/olympicGames/demo.html)  
+<div align='center'>
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/olympicGames.png' />
+</div>  
