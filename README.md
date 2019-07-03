@@ -34,7 +34,7 @@
 
 ### 6、canvas2020东京奥运会的会标，样式如下：  
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/olympicGames/demo.html)  
-[^]: 很巧妙设计：简简单单的图案，但一眼看出年份、国家和奥林匹克。
+<!-- 很巧妙设计：简简单单的图案，但一眼看出年份、国家和奥林匹克。 -->
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/olympicGames.png' />
 </div>  
