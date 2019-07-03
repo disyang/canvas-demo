@@ -2,27 +2,72 @@
 <html lang="zh">
 
 <head>
-  <meta charset="UTF-8">
-  <title>redenvelope</title>
+    <meta charset="UTF-8">
+    <title>redenvelope</title>
 </head>
 
 <body>
-  <div id="canvas-warp">
-    <canvas id="game" width="200" height="400"></canvas>
-    <canvas id="red" width="200" height="400"></canvas>
-  </div>
+    <div id="canvas-warp">
+        <canvas id="red" width="300" height="600"></canvas>
+    </div>
 
-  <script>
-    const canvas1 = document.querySelector('#game');
-    const context1 = canvas1.getContext('2d');
-    const image = new Image();
-    image.src = 'hongbao.jpg';
-    image.onload = function() {
-      context1.drawImage(image, 0, 0, 200, 400);
-    }
-    const canvas = document.querySelector('#red');
-    const context = canvas.getContext('2d');
-  </script>
+    <script>
+        const canvas = document.querySelector('#red');
+        const context = canvas.getContext('2d');
+        function RedBao(x, y, width, height, radius) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            this.radius = radius;
+        }
+        RedBao.prototype.draw = function (context) {
+            context.beginPath();
+            context.moveTo(this.x, this.y);
+            context.lineTo(this.x, this.y + this.height);
+            context.arcTo(this.x, this.y + this.height + this.radius, this.x + this.radius, this.y + this.height + this.radius, this.radius);
+            context.lineTo(this.x + this.width + this.radius, this.y + this.height + this.radius);
+            context.arcTo(this.x + this.width + 2 * this.radius, this.y + this.radius + this.height, this.x + this.width + 2 * this.radius, this.y + this.height, this.radius);
+            context.lineTo(this.x + this.width + 2 * this.radius, this.y);
+            context.arcTo(this.x + this.width + 2 * this.radius, this.y - this.radius, this.x + this.width + this.radius, this.y - this.radius, this.radius);
+            context.lineTo(this.x + this.radius, this.y - this.radius);
+            context.arcTo(this.x, this.y - this.radius, this.x, this.y, this.radius);
+            context.save();
+            context.clip();
+            const linerGradient = context.createLinearGradient(this.x, this.y - this.radius, this.x, this.y + this.height + this.radius);
+            linerGradient.addColorStop(0, '#FE4D00');
+            linerGradient.addColorStop(1, '#FE0000');
+            context.fillStyle = linerGradient;
+            context.fill();
+            context.beginPath();
+            context.arc(this.x + this.radius + this.width / 2, this.y - 80, this.width, 0, Math.PI);
+            context.lineWidth = 8;
+            context.strokeStyle = '#FED700';
+            context.stroke();
+            context.restore();
+            context.beginPath();
+            context.arc(this.x + this.radius + this.width / 2, this.y + 100, 2 * this.radius, 0, Math.PI * 2);
+            context.fillStyle = '#FED700';
+            context.fill();
+            context.textAlign ='center';
+            context.textBaseline = 'middle';
+            context.font = 'small-caps bold 48px/1 sans-serif';
+            context.fillStyle = '#FE2C00';
+            context.fillText('￥', this.x + this.radius + this.width / 2, this.y + 105);
+            context.fillStyle = '#FFC169';
+            context.fillText('现金奖', this.x + this.radius + this.width / 2, this.y + 200);
+            context.font = '16px 微软雅黑';
+            context.fillText('限6.1-7.12可用', this.x + this.radius + this.width / 2, this.y + this.height);
+            context.font = '18px 微软雅黑';
+            context.fillStyle = '#fff';
+            context.fillText('恭喜获得', this.x + this.radius + this.width / 2, this.y + 1 / 2 * this.radius);            
+            context.fillText('618超级大奖', this.x + this.radius + this.width / 2, this.y + 2 * this.radius);            
+        }
+        context.save();
+        context.translate(50, 125);
+        const hongbao = new RedBao(0, 0, 180, 280, 20);
+        hongbao.draw(context);
+    </script>
 </body>
 
 </html>
