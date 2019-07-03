@@ -21,7 +21,7 @@
             this.height = height;
             this.radius = radius;
         }
-        RedBao.prototype.draw = function (context) {
+        RedBao.prototype.drawEnvelope = function (context) {
             context.beginPath();
             context.moveTo(this.x, this.y);
             context.lineTo(this.x, this.y + this.height);
@@ -63,10 +63,13 @@
             context.fillText('恭喜获得', this.x + this.radius + this.width / 2, this.y + 1 / 2 * this.radius);            
             context.fillText('618超级大奖', this.x + this.radius + this.width / 2, this.y + 2 * this.radius);            
         }
+        Redbao.prototype.drawTicket = function(){
+
+        }
         context.save();
         context.translate(50, 125);
         const hongbao = new RedBao(0, 0, 180, 280, 20);
-        hongbao.draw(context);
+        hongbao.drawEnvelope(context);
     </script>
 </body>
 
