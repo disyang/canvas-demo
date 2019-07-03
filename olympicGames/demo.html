@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Olympic Games 2020</title>
+</head>
+
+<body>
+  <div id="canvas-warp">
+    <canvas id="game" width="800" height="600"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.querySelector('#game');
+    const context = canvas.getContext('2d');
+    context.lineWidth = 16;
+    let x = 200, y = 200, r = 85;
+    context.beginPath();
+    context.arc(x, y, r, 12.8 / 24 * Math.PI, Math.PI * 5 / 24);
+    context.lineTo(x - 69, y + 220);
+    context.lineTo(x - 69, y + 225);
+    context.lineTo(x + 93, y + 225);
+    context.strokeStyle = "#1677B9";
+    context.stroke();
+    x = 400;
+    context.beginPath();
+    context.arc(x, y, r, 12.8 / 24 * Math.PI, Math.PI * 5 / 24);
+    context.lineTo(x - 69, y + 220);
+    context.lineTo(x - 69, y + 225);
+    context.lineTo(x + 93, y + 225);
+    context.strokeStyle = "#000";
+    context.stroke();
+    x = 600;
+    context.beginPath();
+    context.arc(x, y, r, 0, Math.PI * 2);
+    context.fillStyle = "#E62044";
+    context.strokeStyle = "#E62044";
+    context.stroke();
+    context.fill();
+    x = 200;
+    context.beginPath();
+    context.arc(x + 100, y + r, r, 0, 2 * Math.PI);
+    context.strokeStyle = "#F7B71C";
+    context.stroke();
+    context.beginPath();
+    context.arc(x, y, r, -Math.PI / 6, Math.PI * 5 / 24);
+    context.strokeStyle = "#1677B9";
+    context.stroke();
+    context.save();
+    context.beginPath();
+    context.arc(x + 100, y + r, r + 8, 0, 2 * Math.PI);
+    context.clip();
+    x = 400;
+    context.beginPath();
+    context.arc(x, y, r, 0, Math.PI * 3 / 4);
+    context.strokeStyle = "#000";
+    context.stroke();
+    context.restore();
+    x = 400;
+    context.beginPath();
+    context.arc(x + 100, y + r, r, 0, 2 * Math.PI);
+    context.strokeStyle = "#1E9D49";
+    context.stroke();
+    context.beginPath();
+    context.arc(x, y, r, -Math.PI / 6, Math.PI * 5 / 24);
+    context.strokeStyle = "#000";
+    context.stroke();
+    x = 600;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillStyle = "#000";
+    context.font = "24px 黑体";
+    context.fillText("TOKYO", x, y + 225);
+  </script>
+</body>
+
+</html>
