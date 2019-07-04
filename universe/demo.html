@@ -59,8 +59,7 @@
           for (let i = 2; i <= 9; i++) {
             drawRotate(i)
           }
-          if (angle > 360) angle = 0;
-          else angle++;
+          angle++;
           lastTime = timestamp;
         }
         requestAnimationFrame(draw);
