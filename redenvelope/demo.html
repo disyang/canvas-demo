@@ -158,11 +158,11 @@
       }
       canvas.onmousemove = function(e) {
         const {x, y} = windowToCanvas(e.clientX, e.clientY);
-        if(hongbao.isOpen(x, y)){
+        if(hongbao.isOpen(x, y) && hongbao.default){
           clear();
           hongbao.default = false;
           draw();
-        } else if(!hongbao.default) {
+        } else if(!hongbao.isOpen(x, y) && !hongbao.default) {
           clear();
           hongbao.default = true;
           draw();
