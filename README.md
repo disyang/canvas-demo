@@ -44,5 +44,5 @@
 - [x] `requestAnimationFrame`实现动画平滑过渡
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/hongbao.png' />  
-  <img src='https://github.com/yht1989/clock-demo/blob/master/img/openhongbao.png' />  
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/openbao.png' />  
 </div>  
