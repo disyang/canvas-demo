@@ -20,6 +20,7 @@
             this.width = width;
             this.height = height;
             this.radius = radius;
+            this.default = true;
         }
         RedBao.prototype.drawEnvelope = function (context) {
             context.beginPath();
@@ -47,7 +48,7 @@
             context.restore();
             context.beginPath();
             context.arc(this.x + this.radius + this.width / 2, this.y + 100, 2 * this.radius, 0, Math.PI * 2);
-            context.fillStyle = '#FED700';
+            this.default ? context.fillStyle = '#FED700' : context.fillStyle = '#F2E38B';
             context.fill();
             context.textAlign ='center';
             context.textBaseline = 'middle';
@@ -129,9 +130,11 @@
         const INTERVAL = 20;
         let count = 100, lastTime = 0;
         function draw() {
+          context.save();
           hongbao.drawEnvelope(context);
           hongbao.clip(context);
           hongbao.drawTicket(context, count);
+          context.restore();
         }
         draw()
         function drawRedBao(timestamp) {
@@ -150,6 +153,19 @@
         if(hongbao.isOpen(x, y)){
           requestAnimationFrame(drawRedBao);
           canvas.onclick = null;
+          canvas.onmousemove = null;
+        }
+      }
+      canvas.onmousemove = function(e) {
+        const {x, y} = windowToCanvas(e.clientX, e.clientY);
+        if(hongbao.isOpen(x, y)){
+          clear();
+          hongbao.default = false;
+          draw();
+        } else if(!hongbao.default) {
+          clear();
+          hongbao.default = true;
+          draw();
         }
       }
     </script>
