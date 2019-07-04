@@ -1,7 +1,7 @@
 > **普及**：`<canvas>`元素用于在网页上绘制图形，和JS配合可以制作`<canvas>`动画及更复杂的游戏。  
 > **注意**：IE 8 以及更早的版本不支持 `<canvas>` 元素。
 
-### 1、canvas时钟demo，样式如下:  
+### 1、canvas时钟动画demo，样式如下:  
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/clock/clock.html)
 <div align='center'><img src='https://github.com/yht1989/clock-demo/blob/master/img/clock.png' /></div>
 
