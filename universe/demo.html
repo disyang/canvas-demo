@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>universe</title>
+</head>
+
+<body>
+  <canvas id="love" width="600" height="600"></canvas>
+  <script>
+    window.onload = function () {
+      const canvas = document.querySelector('#love');
+      const context = canvas.getContext('2d');
+      const r = 30;
+      function drawBackground() {
+        context.save();
+        context.fillStyle = '#04091c';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.translate(canvas.width / 2, canvas.height / 2);
+        context.beginPath();
+        context.arc(0, 0, r, 0, 2 * Math.PI);
+        context.fillStyle = '#c90';
+        context.shadowColor = '#c90';
+        context.shadowBlur = 50;
+        context.fill();
+        context.strokeStyle = '#394057';
+
+        function drawCircle(n) {
+          context.beginPath();
+          context.arc(0, 0, n * r, 0, 2 * Math.PI);
+          context.stroke();
+        }
+        for (let i = 2; i <= 9; i++) {
+          drawCircle(i);
+        }
+      }
+      const rate = [1, 1, 9, 4, 7, 6, 5, 3, 6, 9], INTERVAL = 50;
+      let angle = 0, lastTime = 0;
+      function clear() {
+        context.restore();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      function drawRotate(i) {
+        context.save();
+        context.beginPath();
+        context.rotate(angle * rate[i] * Math.PI / 180);
+        context.arc(r * i, 0, 5, 0, 2 * Math.PI);
+        context.fillStyle = "#3f3f8f";
+        context.fill();
+        context.restore();
+      }
+      function draw(timestamp) {
+        if (timestamp - lastTime > INTERVAL) {
+          clear();
+          drawBackground();
+          for (let i = 2; i <= 9; i++) {
+            drawRotate(i)
+          }
+          if (angle > 360) angle = 0;
+          else angle++;
+          lastTime = timestamp;
+        }
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    }
+  </script>
+</body>
+
+</html>
