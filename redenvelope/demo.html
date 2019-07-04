@@ -51,7 +51,7 @@
             context.fill();
             context.textAlign ='center';
             context.textBaseline = 'middle';
-            context.font = 'small-caps bold 48px/1 sans-serif';
+            context.font = 'bold 48px sans-serif';
             context.fillStyle = '#FE2C00';
             context.fillText('開', this.x + this.radius + this.width / 2, this.y + 100);
             context.fillStyle = '#FFC169';
@@ -133,18 +133,18 @@
           hongbao.clip(context);
           hongbao.drawTicket(context, count);
         }
+        draw()
         function drawRedBao(timestamp) {
           if(count >= 10) {
             if(timestamp - lastTime > INTERVAL){
               clear();
               draw();
-              count -= 2;
+              count -= 5;
               lastTime = timestamp;
             }
             requestAnimationFrame(drawRedBao);
           }
         }
-      draw()
       canvas.onclick = function(e) {
         const {x, y} = windowToCanvas(e.clientX, e.clientY);
         if(hongbao.isOpen(x, y)){
