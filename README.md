@@ -48,3 +48,9 @@
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/clickbao.png' />
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/openbao.png' />
 </div>  
+
+### 8、canvas仿行星绕太阳旋转，样式如下：
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/universe/demo.html)  
+<div align='center'>
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/universe.png' />
+</div>  
