@@ -8,7 +8,7 @@
 
 <body>
     <div id="canvas-warp">
-        <canvas id="red" width="300" height="600"></canvas>
+        <canvas id="red" width="300" height="400"></canvas>
     </div>
 
     <script>
@@ -53,23 +53,105 @@
             context.textBaseline = 'middle';
             context.font = 'small-caps bold 48px/1 sans-serif';
             context.fillStyle = '#FE2C00';
-            context.fillText('￥', this.x + this.radius + this.width / 2, this.y + 105);
+            context.fillText('開', this.x + this.radius + this.width / 2, this.y + 100);
             context.fillStyle = '#FFC169';
             context.fillText('现金奖', this.x + this.radius + this.width / 2, this.y + 200);
-            context.font = '16px 微软雅黑';
+            context.font = '12px 微软雅黑';
             context.fillText('限6.1-7.12可用', this.x + this.radius + this.width / 2, this.y + this.height);
             context.font = '18px 微软雅黑';
             context.fillStyle = '#fff';
             context.fillText('恭喜获得', this.x + this.radius + this.width / 2, this.y + 1 / 2 * this.radius);            
             context.fillText('618超级大奖', this.x + this.radius + this.width / 2, this.y + 2 * this.radius);            
         }
-        Redbao.prototype.drawTicket = function(){
-
+        RedBao.prototype.drawTicket = function(context, y = 0){
+          context.beginPath();
+          context.fillStyle = '#FFF0CF';
+          context.save();
+          context.shadowBlur = 16;
+          context.shadowColor = 'rgba(0, 0, 0, 0.5)';
+          context.shadowOffsetX = 4;
+          context.shadowOffsetY = 4;
+          context.fillRect(this.x + this.radius, y, this.width, this.height / 2);
+          context.restore();
+          context.beginPath();
+          context.moveTo(this.x + this.radius * 3 / 2, y + this.radius);
+          context.lineTo(this.x + this.radius * 4, y + this.radius);
+          context.lineTo(this.x + this.radius * 7 / 2, y + this.radius * 3 / 8);
+          context.lineTo(this.x + this.radius * 2, y + this.radius * 3 / 8);
+          context.closePath();
+          context.strokeStyle = '#FE4D00';
+          context.stroke();
+          context.font = '8px 微软雅黑';
+          context.fillStyle = '#FE4D00';
+          context.fillText('限时红包', this.x + this.radius * 11 / 4 + 0.5, y + this.radius * 11 / 16);
+          context.textAlign = 'start';
+          context.fillStyle = '#FB9017';
+          context.fillText('最高 ￥', this.x + this.radius * 3 / 2, y + this.radius * 3 / 2);
+          context.fillStyle = '#000';
+          context.fillText('玛莎拉蒂总裁通用红包', this.x + this.radius * 3 / 2, y + this.radius * (2 + 0.2));
+          context.fillStyle = '#409eff';
+          context.fillText('规则详情', this.x + this.radius * 3 / 2, y + this.radius * (5 / 2 + 0.3));
+          context.font = '12px 微软雅黑';
+          context.fillStyle = '#FB9017';
+          context.fillText('1888', this.x + this.radius * 3, y + this.radius * 3 / 2 - 2);
+          context.fillStyle = '#00C1DF';
+          context.fillRect(this.x + this.radius * 6.5, y + this.radius * (2 + 0.2), this.radius * 3, this.radius * 3 / 4);
+          context.fillStyle = '#fff';
+          context.textAlign = 'center';
+          context.textBaseline = 'middle';
+          context.font = '8px 微软雅黑';
+          context.fillText('立即领取', this.x + this.radius * 8, y + this.radius * (19 / 8 + 0.2) - 1);
+        }
+        RedBao.prototype.clip = function (context) {
+          context.beginPath();
+          context.arc(this.x + this.radius + this.width / 2, this.y - 80, this.width - 2, 0, Math.PI);
+          context.clip();
+        }
+        RedBao.prototype.isOpen = function(x, y) {
+          context.beginPath();
+          context.arc(this.x + this.radius + this.width / 2, this.y + 100, 2 * this.radius, 0, Math.PI * 2);
+          return context.isPointInPath(x, y);
+        }
+        function clear() {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        // 获取鼠标在canvas定位
+        function windowToCanvas(x, y) {
+          const bbox = canvas.getBoundingClientRect();
+          return {
+            x: x - bbox.left * (canvas.width / bbox.width),
+            y: y - bbox.top * (canvas.height / bbox.height)
+          }
         }
         context.save();
-        context.translate(50, 125);
+        context.translate(30, 50);
         const hongbao = new RedBao(0, 0, 180, 280, 20);
-        hongbao.drawEnvelope(context);
+        const INTERVAL = 20;
+        let count = 100, lastTime = 0;
+        function draw() {
+          hongbao.drawEnvelope(context);
+          hongbao.clip(context);
+          hongbao.drawTicket(context, count);
+        }
+        function drawRedBao(timestamp) {
+          if(count >= 10) {
+            if(timestamp - lastTime > INTERVAL){
+              clear();
+              draw();
+              count -= 2;
+              lastTime = timestamp;
+            }
+            requestAnimationFrame(drawRedBao);
+          }
+        }
+      draw()
+      canvas.onclick = function(e) {
+        const {x, y} = windowToCanvas(e.clientX, e.clientY);
+        if(hongbao.isOpen(x, y)){
+          requestAnimationFrame(drawRedBao);
+          canvas.onclick = null;
+        }
+      }
     </script>
 </body>
 
