@@ -38,7 +38,7 @@
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/olympicGames.png' />
 </div>  
 
-### 7、canvas 红包打开demo，样式如下：
+### 7、canvas红包打开demo，样式如下：
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/redenvelope/demo.html)  
 - [x] 点击`開`打开红包
 - [x] `requestAnimationFrame`实现动画平滑过渡
