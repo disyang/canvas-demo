@@ -59,7 +59,6 @@
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/rotation/demo.html)  
 - [x] 地球绕太阳旋转运动
 - [x] 月球绕地球旋转运动
-- [x] 两者旋转速率不同
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/rotation.png' />
 </div>  
