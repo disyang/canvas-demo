@@ -62,3 +62,13 @@
 <div align='center'>
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/rotation.png' />
 </div>  
+
+### 10、canvas贪吃蛇小游戏，样式如下：
+[GitHub源码](https://github.com/yht1989/clock-demo/blob/master/snake/demo.html)  
+- [x] 上下左右键控制方向
+<div align='center'>
+  <img src='https://github.com/yht1989/clock-demo/blob/master/img/snake.png' />
+</div>  
+
+
+
