@@ -54,7 +54,7 @@
             context.textBaseline = 'middle';
             context.font = 'bold 48px sans-serif';
             context.fillStyle = '#FE2C00';
-            context.fillText('開', this.x + this.radius + this.width / 2, this.y + 103);
+            context.fillText('開', this.x + this.radius + this.width / 2, this.y + 100);
             context.fillStyle = '#FFC169';
             context.fillText('现金奖', this.x + this.radius + this.width / 2, this.y + 200);
             context.font = '12px 微软雅黑';
@@ -76,18 +76,18 @@
           context.restore();
           context.beginPath();
           context.moveTo(this.x + this.radius * 3 / 2, y + this.radius);
-          context.lineTo(this.x + this.radius * 4, y + this.radius);
+          context.lineTo(this.x + this.radius * 7 / 2, y + this.radius);
           context.lineTo(this.x + this.radius * 7 / 2, y + this.radius * 3 / 8);
-          context.lineTo(this.x + this.radius * 2, y + this.radius * 3 / 8);
+          context.lineTo(this.x + this.radius * 3 / 2, y + this.radius * 3 / 8);
           context.closePath();
           context.strokeStyle = '#FE4D00';
           context.stroke();
           context.font = '8px 微软雅黑';
           context.fillStyle = '#FE4D00';
-          context.fillText('限时红包', this.x + this.radius * 11 / 4 + 0.5, y + this.radius * 11 / 16);
+          context.fillText('限时红包', this.x + this.radius * 10 / 4, y + this.radius * 11 / 16);
           context.textAlign = 'start';
           context.fillStyle = '#FB9017';
-          context.fillText('最高 ￥', this.x + this.radius * 3 / 2, y + this.radius * 3 / 2);
+          context.fillText('最高   ￥', this.x + this.radius * 3 / 2, y + this.radius * 3 / 2);
           context.fillStyle = '#000';
           context.fillText('玛莎拉蒂总裁通用红包', this.x + this.radius * 3 / 2, y + this.radius * (2 + 0.2));
           context.fillStyle = '#409eff';
@@ -128,7 +128,7 @@
         context.translate(30, 50);
         const hongbao = new RedBao(0, 0, 180, 280, 20);
         const INTERVAL = 20;
-        let count = 110, lastTime = 0;
+        let count = 100, lastTime = 0;
         function draw() {
           context.save();
           hongbao.drawEnvelope(context);
