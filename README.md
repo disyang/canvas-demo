@@ -55,7 +55,7 @@
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/universe.png' />
 </div>  
 
-### 9、canvas仿地球绕太阳和月球绕地球旋转动画，样式如下：
+### 9、canvas仿地球绕太阳和月球绕地球旋转，样式如下：
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/rotation/demo.html)  
 - [x] 地球绕太阳旋转运动
 - [x] 月球绕地球旋转运动
