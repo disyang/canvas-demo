@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lottery</title>
+</head>
+
+<body>
+  <canvas id="lottery" width="800" height="800"></canvas>
+  <script>
+    const img = new Image();
+    const imgData = [
+      { x: 0, y: 0, w: 120, h: 71 },
+      { x: 120, y: 0, w: 120, h: 71 },
+      // { x: 240, y: 0 },
+      { x: 360, y: 0, w: 120, h: 71 },
+      { x: 480, y: 0, w: 120, h: 71 },
+      { x: 0, y: 71, w: 120, h: 71 },
+      { x: 120, y: 71, w: 120, h: 71 },
+      { x: 240, y: 71, w: 120, h: 71 },
+      { x: 360, y: 71, w: 120, h: 71 },
+      { x: 480, y: 71, w: 120, h: 71 },
+      { x: 0, y: 142, w: 120, h: 71 },
+      { x: 120, y: 142, w: 120, h: 71 },
+      { x: 240, y: 142, w: 120, h: 71 },
+      { x: 360, y: 142, w: 120, h: 71 },
+      { x: 480, y: 142, w: 120, h: 71 },
+    ]
+    const position = [
+      { x: 0, y: 0, w: 120, h: 71, text: ''},
+      { x: 130, y: 0, w: 120, h: 71, text: ''},
+      { x: 260, y: 0, w: 120, h: 71, text: ''},
+      { x: 390, y: 0, w: 120, h: 71, text: ''},
+      { x: 520, y: 0, w: 120, h: 71, text: ''},
+      { x: 520, y: 81, w: 120, h: 71, text: ''},
+      { x: 520, y: 162, w: 120, h: 71, text: ''},
+      { x: 520, y: 243, w: 120, h: 71, text: ''},
+      { x: 390, y: 243, w: 120, h: 71, text: ''},
+      { x: 260, y: 243, w: 120, h: 71, text: ''},
+      { x: 130, y: 243, w: 120, h: 71, text: ''},
+      { x: 0, y: 243, w: 120, h: 71, text: ''},
+      { x: 0, y: 162, w: 120, h: 71, text: ''},
+      { x: 0, y: 81, w: 120, h: 71, text: ''},
+    ]
+    img.src = 'libs.png'
+    img.onload = function(){
+      const canvas = document.querySelector('#lottery');
+      const context = canvas.getContext('2d');
+      function drawLayer() {
+        context.save();
+        context.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        context.shadowBlur = 50;
+        context.translate(10, 10);
+        for(let i = 0; i < position.length; i++){
+          context.beginPath();
+          context.drawImage(img, imgData[i].x, imgData[i].y, imgData[i].w, imgData[i].h, position[i].x, position[i].y, position[i].w, position[i].h);
+        }
+        context.beginPath();
+        context.save();
+        context.globalAlpha = 0.8;
+        context.fillStyle = '#221D46';
+        context.fillRect(imgData[1].w + 10, imgData[1].h + 10, 3 * imgData[1].w + 20, 2 * imgData[1].h + 10);
+        context.restore();
+        context.restore();
+      }
+      function clear() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      function drawLoop(x = 0, y = 0, w = 120, h = 71){
+        context.save();
+        context.beginPath();
+        context.globalAlpha = 0.5;
+        context.translate(10, 10);
+        const gradient = context.createLinearGradient(x, y, w, y);
+        gradient.addColorStop(0, '#E3648E');
+        gradient.addColorStop(0.5, '#fff');
+        gradient.addColorStop(1, '#E3648E');
+        context.fillStyle = gradient;
+        context.fillRect(x, y, w, h);
+        context.restore();
+      }
+      const INTERVAL = 200;
+      let lastTime = 0, count = 0;
+      function drawAnimation(timestmap){
+        if(timestmap - lastTime > INTERVAL) {
+          clear();
+          drawLayer();
+          drawLoop(position[count].x, position[count].y, position[count].w, position[count].h);
+          if(count === 13) count = 0;
+          else count++;
+          lastTime = timestmap;
+        }
+        requestAnimationFrame(drawAnimation);
+      }
+      requestAnimationFrame(drawAnimation);
+    }
+    img.onerror = function(){
+      alert('图片加载失败，请刷新页面！')
+    }
+  </script>
+</body>
+
+</html>
