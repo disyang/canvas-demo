@@ -15,7 +15,6 @@
     const imgData = [
       { x: 0, y: 0, w: 120, h: 71 },
       { x: 120, y: 0, w: 120, h: 71 },
-      // { x: 240, y: 0 },
       { x: 360, y: 0, w: 120, h: 71 },
       { x: 480, y: 0, w: 120, h: 71 },
       { x: 0, y: 71, w: 120, h: 71 },
@@ -30,25 +29,41 @@
       { x: 480, y: 142, w: 120, h: 71 },
     ]
     const position = [
-      { x: 0, y: 0, w: 120, h: 71, text: ''},
-      { x: 130, y: 0, w: 120, h: 71, text: ''},
-      { x: 260, y: 0, w: 120, h: 71, text: ''},
-      { x: 390, y: 0, w: 120, h: 71, text: ''},
-      { x: 520, y: 0, w: 120, h: 71, text: ''},
-      { x: 520, y: 81, w: 120, h: 71, text: ''},
-      { x: 520, y: 162, w: 120, h: 71, text: ''},
-      { x: 520, y: 243, w: 120, h: 71, text: ''},
-      { x: 390, y: 243, w: 120, h: 71, text: ''},
-      { x: 260, y: 243, w: 120, h: 71, text: ''},
-      { x: 130, y: 243, w: 120, h: 71, text: ''},
-      { x: 0, y: 243, w: 120, h: 71, text: ''},
-      { x: 0, y: 162, w: 120, h: 71, text: ''},
-      { x: 0, y: 81, w: 120, h: 71, text: ''},
+      { x: 0, y: 0, w: 120, h: 71 },
+      { x: 130, y: 0, w: 120, h: 71 },
+      { x: 260, y: 0, w: 120, h: 71 },
+      { x: 390, y: 0, w: 120, h: 71 },
+      { x: 520, y: 0, w: 120, h: 71 },
+      { x: 520, y: 81, w: 120, h: 71 },
+      { x: 520, y: 162, w: 120, h: 71 },
+      { x: 520, y: 243, w: 120, h: 71 },
+      { x: 390, y: 243, w: 120, h: 71 },
+      { x: 260, y: 243, w: 120, h: 71 },
+      { x: 130, y: 243, w: 120, h: 71 },
+      { x: 0, y: 243, w: 120, h: 71 },
+      { x: 0, y: 162, w: 120, h: 71 },
+      { x: 0, y: 81, w: 120, h: 71 },
     ]
     img.src = 'libs.png'
     img.onload = function(){
       const canvas = document.querySelector('#lottery');
       const context = canvas.getContext('2d');
+      const global = {
+        interval: 200,
+        lastTime: 0,
+        count: 3,
+        index: 0,
+        isMouseOver: false,
+        isRun: false,
+        loopCount: 0,
+      }
+      function windowToCanvas(x, y) {
+        const bbox = canvas.getBoundingClientRect();
+        return {
+          x: x - bbox.left * (canvas.width / bbox.width),
+          y: y - bbox.top * (canvas.height / bbox.height),
+        }
+      }
       function drawLayer() {
         context.save();
         context.shadowColor = 'rgba(0, 0, 0, 0.5)';
@@ -58,12 +73,29 @@
           context.beginPath();
           context.drawImage(img, imgData[i].x, imgData[i].y, imgData[i].w, imgData[i].h, position[i].x, position[i].y, position[i].w, position[i].h);
         }
+        context.restore();
+      }
+      function drawClick(){
         context.beginPath();
         context.save();
+        context.translate(10, 10);
+        context.rect(imgData[1].w + 10, imgData[1].h + 10, 3 * imgData[1].w + 20, 2 * imgData[1].h + 10);
+        context.clip();
+        clear();
+        context.save();
         context.globalAlpha = 0.8;
-        context.fillStyle = '#221D46';
+        context.fillStyle = global.isMouseOver ? '#E3CE5F' : '#FED700';
         context.fillRect(imgData[1].w + 10, imgData[1].h + 10, 3 * imgData[1].w + 20, 2 * imgData[1].h + 10);
         context.restore();
+        context.shadowColor = 'transparent'
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = '#FE2600';
+        context.font = 'bold 36px 微软雅黑';
+        context.fillText('立即抽奖', 2.5 * imgData[1].w + 20, 2 * imgData[1].h + 15);
+        context.fillStyle = '#fff';
+        context.font = '16px 微软雅黑';
+        context.fillText(`剩余${global.count}次机会`, 2.5 * imgData[1].w + 20, 3 * imgData[1].h);
         context.restore();
       }
       function clear() {
@@ -82,20 +114,58 @@
         context.fillRect(x, y, w, h);
         context.restore();
       }
-      const INTERVAL = 200;
-      let lastTime = 0, count = 0;
       function drawAnimation(timestmap){
-        if(timestmap - lastTime > INTERVAL) {
-          clear();
-          drawLayer();
-          drawLoop(position[count].x, position[count].y, position[count].w, position[count].h);
-          if(count === 13) count = 0;
-          else count++;
-          lastTime = timestmap;
+        if(global.loopCount >= 0) {
+          if(timestmap - global.lastTime > global.interval) {
+            clear();
+            drawLayer();
+            drawClick();
+            drawLoop(position[global.index].x, position[global.index].y, position[global.index].w, position[global.index].h);
+            if(global.index === 13) global.index = 0;
+            else global.index++;
+            global.loopCount--;
+            global.lastTime = timestmap;
+          }
+          requestAnimationFrame(drawAnimation);
+        } else {
+          global.isRun = false;
         }
-        requestAnimationFrame(drawAnimation);
       }
-      requestAnimationFrame(drawAnimation);
+      drawLayer();
+      drawClick();
+      // 随机生成数字区间
+      function random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      // 判断是否悬浮
+      function isPointInPath(x, y) {
+        context.save();
+        context.beginPath();
+        context.translate(10, 10);
+        context.rect(imgData[1].w + 10, imgData[1].h + 10, 3 * imgData[1].w + 20, 2 * imgData[1].h + 10);
+        context.restore();
+        return context.isPointInPath(x, y);
+      }
+      canvas.onmousemove = function(e) {
+        const { x, y } = windowToCanvas(e.clientX, e.clientY);
+        if(isPointInPath(x, y) && !global.isMouseOver) {
+          global.isMouseOver = true;
+          drawClick();
+        } else if(!isPointInPath(x, y) && global.isMouseOver) {
+          global.isMouseOver = false;
+          drawClick();
+        }
+      }
+      canvas.onclick = function(e) {
+        if(global.isRun) return;
+        const { x, y } = windowToCanvas(e.clientX, e.clientY);
+        if(isPointInPath(x, y) && global.count > 0) {
+          global.loopCount = random(30, 44);
+          global.isRun = true;
+          global.count--;
+          requestAnimationFrame(drawAnimation);
+        }
+      }
     }
     img.onerror = function(){
       alert('图片加载失败，请刷新页面！')
