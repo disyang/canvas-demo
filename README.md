@@ -70,7 +70,7 @@
   <img src='https://github.com/yht1989/clock-demo/blob/master/img/snake.png' />
 </div>  
 
-### 10、Canvas抽奖小游戏，样式如下：
+### 11、Canvas抽奖小游戏，样式如下：
 [GitHub源码](https://github.com/yht1989/clock-demo/blob/master/lottery/demo.html)  
 - [x] 悬浮`点击抽奖`背景变淡
 - [x] 点击`点击抽奖`剩余次数减1
